@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MMR London</title>
+<!-- FINAL: http://www.marketplace.org/topics/world/mind-gap -->
+<style>
+
+.clear { clear:both; }
+
+/*==== CONTAINER ====*/
+#london-container {
+	width:100%;
+	position:relative;
+	overflow:hidden;
+	padding-bottom:30px;
+}
+
+#london-container a {
+	color:#fff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+#london-container a:hover { 
+	text-decoration: underline;	
+}
+
+#london-container header {
+	background:url(http://www.marketplace.org/sites/default/files/mmr-map.jpg) no-repeat #4D4D4D;
+	background-size:cover;
+	width:100%;
+	display:table;
+	overflow: hidden;
+	padding:10px 0;
+}
+
+#london-container h1 {
+	background:url(http://www.marketplace.org/sites/default/files/mtgLogo%402x.png) no-repeat;
+	text-indent: -99999px;
+	width:118px;
+	height:99px;
+	background-size:118px 99px;
+	display:table-cell;
+	vertical-align: middle;
+	padding:0 10px 0 0;
+}
+
+#london-container .viewport {
+	position:absolute;
+	top:15px;
+	left:130px;
+	right:0;
+	height:80px;
+	display:table-cell;
+	vertical-align: middle;
+	overflow:hidden;
+}
+
+#london-container nav { 
+	width:100%;
+}
+
+#london-container nav:after {
+	width:100%;
+	content:'';
+}
+
+#london-container nav ul {
+	padding:0;
+}
+
+#london-container nav ul li {
+	list-style:none;
+	display:inline-block;
+	font:0.813em Helvetica, Arial, sans-serif;
+	font-weight:bold;
+	text-align: center;
+}
+
+
+#london-container nav ul li:first-child {
+	padding-left:0;
+}
+
+#london-container nav ul li:last-child {
+	padding-right:0;
+}
+
+/* TUBE MAP */
+#london-container .progressBar {
+	height:10px;
+	position:relative;
+	background:#EE3224;
+	top:40px;
+}
+
+#london-container .progressBar > span {
+	display:block;
+	height:100%;
+	background:#60BFCD;
+	position:relative;
+	overflow: hidden;
+	width:0;
+}
+
+.station.vertical {
+	width: 15px !important;
+	height: 15px;
+    border-radius:50%;
+}
+
+.liverpool .stops #cen01, .notting-hill .stops #cen02, .brixton .stops #cen03, .farringdon .stops #cen04, .seven-sisters .stops #cen05 {
+	background:#00FFFF;
+}
+
+.stops, .stations {
+	text-align: justify;
+	-ms-text-justify:distribute-all-lines;
+	text-justify: distribute-all-lines;
+}
+
+.stretch {
+	width:100%;
+	display: inline-block;
+	font-size:0;
+	line-height: 0;
+}
+
+ul.graphic {position:relative!important;padding:0 0 15px !important;}
+
+.stops #cen01 {
+	left:60px;
+}
+
+.stops #cen05 {
+	right:110px;
+}
+
+.stops #cen01, .stops #cen02, .stops #cen03, .stops #cen04, .stops #cen05 {
+	background:#fff;
+    border:4px solid #000;
+	z-index:10;
+	position:relative;
+	top:4px;
+	width:150px;
+	vertical-align: top;
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+}
+
+.stops #cen01 span, .stops #cen05 span {
+	display:inline-block;
+	margin:30px 0 0 -60px;
+	width:140px;
+}
+
+.stops #cen02 span {
+	display:inline-block;
+	margin:30px 0 0 -70px;
+	width:150px;
+}
+
+.stops #cen03 span {
+	display:inline-block;
+	margin:30px 0 0 -17px;
+}
+
+.stops #cen04 span {
+	display:inline-block;
+	margin:30px 0 0 -30px;
+}
+
+
+.stations li:first-child {
+	right:57px;
+}
+
+.stations li:nth-of-type(2) {
+	right:60px;
+}
+
+.stations li:nth-of-type(4) {
+	left:60px;
+}
+
+
+/* ANIMATION */
+.slider-container,
+.liverpool .progressBar > span, 
+.notting-hill .progressBar > span, 
+.brixton .progressBar > span, 
+.farringdon  .progressBar > span, 
+.seven-sisters .progressBar > span,
+.liverpool .stops #cen01, 
+.notting-hill .stops #cen02, 
+.brixton .stops #cen03, 
+.farringdon .stops #cen04, 
+.seven-sisters .stops #cen05,
+.liverpool nav,
+.notting-hill nav,
+.brixton nav,
+.farringdon nav,
+.seven-sisters nav, a.sm2_link{
+	-webkit-transition: all 0.6s ease;  
+  	-moz-transition: all 0.6s ease;
+  	-ms-transition: all 0.6s ease;
+  	-o-transition: all 0.6s ease;
+  	transition: all 0.6s ease;
+}
+
+.liverpool .progressBar > span {
+	width:7% !important;
+}
+
+.notting-hill .progressBar > span {
+	width:25% !important;
+}
+
+.brixton .progressBar > span {
+	width:50% !important;
+}
+
+.farringdon .progressBar > span {
+	width:75% !important;
+}
+
+.seven-sisters .progressBar > span {
+	width:89% !important;
+}
+
+/*==== SLIDER ====*/
+.slider {
+	display:table;
+	float:left;
+	width:16.67%;
+	overflow:hidden;
+	position:relative;
+}
+
+.slider .bullet-list li a {
+	background:#888;
+	border:2px solid #888888;
+	border-radius: 50%;
+	width:5px;
+	height:5px;
+	text-indent: -99999px;
+	display:inline-block;
+}
+
+.london-img, .london-story {
+	display:table-cell;
+	vertical-align: top;
+}
+
+.london-story {
+	position:relative;
+	background:#171717;
+	color:#fff;
+	border-bottom-right-radius: 10px;
+	padding:20px 20px 40px;
+	word-wrap:break-word;
+}
+
+.london-story ul {
+	padding:0;
+	list-style: none;
+	position:absolute;
+	top:0;
+	right:15px;
+}
+
+
+.london-story ul li { 
+	display:inline; 
+	padding:0 10px;
+}
+
+.london-story span {
+	font: 0.825em seravek,helvetica,arial,sans-serif;
+	color:#ddd;
+	border-bottom: thin solid #666666;
+	text-transform: uppercase;
+	margin:0 0 1.25em 0;
+	padding:0 0 1.25em 0;
+	display:inline-block;
+	width:100%;
+}
+
+.london-story .next a, .london-story .prev a {
+	font: 0.825em seravek,helvetica,arial,sans-serif !important;
+	color:#ddd !important;
+	text-transform: uppercase !important;
+}
+
+#intro .prev, #seven-sisters .next {
+	font: 0.825em seravek,helvetica,arial,sans-serif;
+	color:#393939;
+	text-transform: uppercase;
+	margin:4px 0 0 0;
+}
+
+.london-story .story-title {
+	font-family:"proxima_nova_rgbold",Helvetica,"Nimbus Sans L",sans-serif;
+	color:#F6F6F6;
+	line-height: 1.2;
+	word-wrap:break-word;
+	font-size:1.5em;
+}
+
+.london-story p {
+	font:0.9em Georgia;
+	word-wrap:break-word;
+	line-height:22px;
+	padding:0;
+}
+
+.london-story .play-btn {
+	background-color:#60BFCD;
+	padding:7px 25px;
+	text-transform: uppercase;
+	color:#fff;
+	font:0.875em "proxima_nova_rgbold",Helvetica,"Nimbus Sans L",sans-serif;
+}
+a.sm2_link {
+	background-color:#60BFCD!important;
+	padding:7px 0 7px 30px!important;
+	text-transform: uppercase!important;
+	color:#fff!important;
+	font:0.875em "proxima_nova_rgbold",Helvetica,"Nimbus Sans L",sans-serif!important;
+	border-radius:0!important;
+}
+a.sm2_link:hover {
+	background-color:#29E8E7!important;
+}
+ul.graphic li a, ul.graphic li a.sm2_paused:hover, ul.graphic li a.sm2_link:hover {
+	background-image:url(http://www.marketplace.org/sites/default/files/play.png)!important;
+	background-size:1.25em!important;
+	background-position:7px 50%!important;
+	background-repeat:no-repeat!important;
+	_background-image:url(http://www.marketplace.org/sites/default/files/play.png)!important; /* IE 6 */
+}
+ul.graphic li a.sm2_playing, ul.graphic li a.sm2_playing:hover {
+	background: #60BFCD url(http://www.marketplace.org/sites/default/files/pause.png) no-repeat 7px 50%!important;
+	background-size:16px!important;
+}
+.london-img {
+	width:70%;
+}
+
+.london-img .story-img {
+	width:100%;
+	max-width:100%;
+	height:auto;
+	vertical-align: bottom;
+}
+
+.slider .bullet-list {
+	position:absolute;
+	bottom:0px;
+	right:20px;
+}
+
+.slider .bullet-list li {
+	display:inline;
+	list-style: none;
+}
+
+#slide1 .liverpool-btn, #slide2 .notting-hill-btn, #slide3 .brixton-btn, #slide4 .farringdon-btn, #slide5 .seven-sisters-btn {
+	background:none;
+}
+
+
+.slider-container {width:600%;margin-left:-100%;}
+.intro .slider-container {margin-left:0;}
+.intro #intro {display:block;}
+
+/* LIVERPOOL */
+.liverpool .slider-container {margin-left:-100%;}
+.liverpool #liverpool {display:block;}
+
+
+/* NOTTING HILL */
+.notting-hill .slider-container {margin-left:-200%;}
+.notting-hill #notting {display:block;}
+
+/* BRIXTON */
+.brixton .slider-container {margin-left:-300%;}
+.brixton #brixton {display:block;}
+
+/* FARRINGDON */
+.farringdon .slider-container {margin-left:-400%;}
+.farringdon #farringdon {display:block;}
+
+/* SEVEN SISTERS */
+.seven-sisters .slider-container {margin-left:-500%;}
+.seven-sisters #tottenham {display:block;}
+
+
+div.data-sources {position:absolute;right:0;bottom:10px;font-size:.75em;color:#666;}
+div.data-sources a {color:#777!important;}
+@media only screen and (max-width : 968px) {
+	#london-container nav {
+		width:1000px;
+	}
+
+	.notting-hill nav {
+		margin-left:-180px;
+	}
+
+	.brixton nav {
+		margin-left:-450px;
+	}
+
+	.farringdon nav {
+		margin-left:-665px;
+	}
+
+	.seven-sisters nav {
+		margin-left:-800px;
+	}
+	
+	.slider {
+		display:inline;
+	}
+
+	.london-img { width:100%; }
+
+	.london-img, .london-story {
+		display:table;
+		margin:0;
+		vertical-align: top;
+	}
+
+	.london-story p {
+		font-size:13px;
+		line-height:18px;
+	}
+	div#apm_media_wrapper {
+		bottom: 10px;
+		left: 20px;
+		right:auto!important;
+	}
+}
+
+@media only screen and (min-width : 968px) and (max-width : 1024px) {
+	#london-container nav { 
+		width:1000px; 
+	}
+
+	.farringdon nav {
+		margin-left:-175px;
+	}
+
+	.brixton nav, .seven-sisters nav {
+		margin-left:-150px;
+	}
+
+	.slider {
+		display:inline;
+	}
+
+	.london-img { width:100%; }
+
+	.london-img, .london-story {
+		display:table;
+		margin:0;
+		vertical-align: top;
+	}
+
+}
+/* Social */
+ul.mtg-social-links {position:absolute;bottom:0;top:auto;left:16px;height:33px;margin-bottom:9px;}
+li.fb-share-icon, li.twitter-share-icon {display:inline-block !important;height:30px;width:30px;padding:0!important;overflow:hidden;}
+li.fb-share-icon img {width:10px;margin:10px;}
+li.twitter-share-icon img {width:25px;margin:11px 2px;}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="london-container" class="wrap">
+		<header>
+			<a href="http://www.marketplace.org/topics/world/mind-gap"><h1>Mind The Gap</h1></a>
+			<div class="viewport">
+				<nav id="menu" role="navigation">
+					<div class="progressBar">
+						<span></span>
+					</div>
+						<ul class="stops">
+							<li id="cen01" class="station vertical"><span><a href="#" class="liverpool-btn">Liverpool Street</a></span></li>
+							<li id="cen02" class="station vertical"><span><a href="#" class="notting-hill-btn">Notting Hill Gate</a></span></li>
+							<li id="cen03" class="station vertical"><span><a href="#" class="brixton-btn">Brixton</a></span></li>
+							<li id="cen04" class="station vertical"><span><a href="#" class="farringdon-btn">Farringdon</a></span></li>
+							<li id="cen05" class="station vertical"><span><a href="#" class="seven-sisters-btn">Canary Wharf</a></span></li>
+							<li class="stretch"></li>
+						</ul>
+				</nav>
+			</div>
+			<div class="clear"></div>
+		</header> <!-- // HEADER -->
+		<div class="slider-container">
+			<div id="intro" class="slider">
+				<div class="london-img">
+					<a href="#"><img src="http://www.marketplace.org/sites/default/files/Notting-Hill-Gate-Station-1.jpg" alt="" class="story-img"></a>
+				</div> <!-- // IMG -->
+
+				<div class="london-story">
+					<span>A Special Series</span>
+					<ul>
+						<li class="prev">Previous</li>
+						<li class="next"><a href="#" class="liverpool-btn">Next</a></li>
+					</ul>
+
+					<a href="#" class="story-title">Mind the Gap</a>
+					<p>Marketplace explores the growing income inequality in the U.K. in general, and in London in particular. The five wealthiest people in the U.K. have more money than the poorest 20 percent of the population. And by 2020, an estimated 800,000 children will be living below the poverty line.</p>
+					
+					<ul class="mtg-social-links">
+						<li class="fb-share-icon"><a title="Mind The Gap" href="https://www.facebook.com/sharer/sharer.php?u=http://www.marketplace.org/topics/world/mind-gap" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/facebook.png"></a></li>
+						<li class="twitter-share-icon"><a href="https://twitter.com/intent/tweet?text=Think%20income%20inequality%20is%20getting%20worse%20in%20the%20U.S.%3F%20Check%20the%20growing%20gap%20in%20the%20U.K%E2%80%A6%20%40marketplace%E2%80%99s%20special%20%20Mind%20The%20Gap%20http%3A%2F%2Fmktplc.org%2F1sLO8Nx" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/twitter.png"></a></li>
+					</ul>
+				</div> <!-- // STORY -->
+
+				<ul class="bullet-list">
+					<li><a href="#" class="intro-btn" style="background:none;">Bullet 0</a></li>
+					<li><a href="#" class="liverpool-btn">Bullet 1</a></li>
+					<li><a href="#" class="notting-hill-btn">Bullet 2</a></li>
+					<li><a href="#" class="brixton-btn">Bullet 3</a></li>
+					<li><a href="#" class="farringdon-btn">Bullet 4</a></li>
+					<li><a href="#" class="seven-sisters-btn">Bullet 5</a></li>
+				</ul>
+			</div> <!-- // SLIDE -->
+			<div id="liverpool" class="slider">
+				<div class="london-img">
+					<a href="#"><img src="http://www.marketplace.org/sites/default/files/Liverpool-Street---Jacqui-Struthers.jpg" alt="" class="story-img"></a>
+				</div> <!-- // IMG -->
+
+				<div class="london-story">
+					<span>A Special Series</span>
+					<ul>
+						<li class="prev"><a href="#" class="intro-btn">Previous</a></li>
+						<li class="next"><a href="#" class="notting-hill-btn">Next</a></li>
+					</ul>
+
+					<a href="#" class="story-title">Liverpool Street Station, Jacqui Struthers</a>
+					<p>Located in the northeastern part of London, Liverpool Street station opened in 1874. As part of the Tower Hamlets borough, the average household income is just more than $49,000. The borough&rsquo;s 42 percent child poverty rate is the highest of any local authority in the UK.</p>
+					
+					 <ul class="graphic">
+
+						  <li><a href="http://www.marketplace.org/sites/default/files/0521Liverpool.mp3">Listen to Jacqui Struthers</a></li>
+					</ul>
+					<ul class="mtg-social-links">
+						<li class="fb-share-icon"><a title="Mind The Gap" href="https://www.facebook.com/sharer/sharer.php?u=http://www.marketplace.org/topics/world/mind-gap" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/facebook.png"></a></li>
+						<li class="twitter-share-icon"><a href="https://twitter.com/intent/tweet?text=Think%20income%20inequality%20is%20getting%20worse%20in%20the%20U.S.%3F%20Check%20the%20growing%20gap%20in%20the%20U.K%E2%80%A6%20%40marketplace%E2%80%99s%20special%20%20Mind%20The%20Gap%20http%3A%2F%2Fmktplc.org%2F1sLO8Nx" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/twitter.png"></a></li>
+					</ul>
+				</div> <!-- // STORY -->
+
+				<ul class="bullet-list">
+					<li><a href="#" class="intro-btn">Bullet 0</a></li>
+					<li><a href="#" class="liverpool-btn" style="background:none;">Bullet 1</a></li>
+					<li><a href="#" class="notting-hill-btn">Bullet 2</a></li>
+					<li><a href="#" class="brixton-btn">Bullet 3</a></li>
+					<li><a href="#" class="farringdon-btn">Bullet 4</a></li>
+					<li><a href="#" class="seven-sisters-btn">Bullet 5</a></li>
+				</ul>
+			</div> <!-- // SLIDE -->
+
+			<div id="notting-hill" class="slider">
+				<div class="london-img">
+					<a href="#"><img src="http://www.marketplace.org/sites/default/files/Notting-Hill-Gate---David-Roberts.jpg" alt="" class="story-img"></a>
+				</div> <!-- // IMG -->
+
+				<div class="london-story">
+					<span>A Special Series</span>
+					<ul>
+						<li class="prev"><a href="#" class="liverpool-btn">Previous</a></li>
+						<li class="next"><a href="#" class="brixton-btn">Next</a></li>
+					</ul>
+
+					<a href="#" class="story-title">Notting Hill Gate Station, David Roberts</a>
+					<p>According to Visit London, &ldquo;Notting Hill&rsquo;s chic appearance - made famous by Richard Curtis&rsquo; 1999 film - is in fact relatively new. In the early 19th century, the area was dominated by potteries and pig farms&rdquo;. The average household income in the Kensington and Chelsea borough is more than $170,000 and the average property value is over $2 million.</p>
+					<ul class="graphic">
+						<li><a href="http://www.marketplace.org/sites/default/files/0521NottingHill.mp3">Listen to David Roberts</a></li>
+					</ul>
+					<ul class="mtg-social-links">
+						<li class="fb-share-icon"><a title="Mind The Gap" href="https://www.facebook.com/sharer/sharer.php?u=http://www.marketplace.org/topics/world/mind-gap" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/facebook.png"></a></li>
+						<li class="twitter-share-icon"><a href="https://twitter.com/intent/tweet?text=Think%20income%20inequality%20is%20getting%20worse%20in%20the%20U.S.%3F%20Check%20the%20growing%20gap%20in%20the%20U.K%E2%80%A6%20%40marketplace%E2%80%99s%20special%20%20Mind%20The%20Gap%20http%3A%2F%2Fmktplc.org%2F1sLO8Nx" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/twitter.png"></a></li>
+					</ul>
+				</div> <!-- // STORY -->
+				
+				<ul class="bullet-list">
+					<li><a href="#" class="intro-btn">Bullet 0</a></li>
+					<li><a href="#" class="liverpool-btn">Bullet 1</a></li>
+					<li><a href="#" class="notting-hill-btn" style="background:none;">Bullet 2</a></li>
+					<li><a href="#" class="brixton-btn">Bullet 3</a></li>
+					<li><a href="#" class="farringdon-btn">Bullet 4</a></li>
+					<li><a href="#" class="seven-sisters-btn">Bullet 5</a></li>
+				</ul>
+			</div> <!-- // SLIDE 2 -->
+
+			<div id="brixton" class="slider">
+				<div class="london-img">
+					<a href="#"><img src="http://www.marketplace.org/sites/default/files/yulius.jpg" alt="" class="story-img"></a>
+				</div> <!-- // IMG -->
+
+				<div class="london-story">
+					<span>A Special Series</span>
+					<ul>
+						<li class="prev"><a href="#" class="notting-hill-btn">Previous</a></li>
+						<li class="next"><a href="#" class="farringdon-btn">Next</a></li>
+					</ul>
+
+					<a href="#" class="story-title">Brixton Station, Yulius</a>
+					<p>Brixton station, located in the Lambeth borough in southern London. The station opened in July 1971. The average household income is slightly more than $50,000 and the child poverty rate is 26 percent.</p>
+					<ul class="graphic">
+						  <li><a href="http://www.marketplace.org/sites/default/files/0521Brixton.mp3">Listen to Yulius</a></li>
+					</ul>
+					<ul class="mtg-social-links">
+						<li class="fb-share-icon"><a title="Mind The Gap" href="https://www.facebook.com/sharer/sharer.php?u=http://www.marketplace.org/topics/world/mind-gap" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/facebook.png"></a></li>
+						<li class="twitter-share-icon"><a href="https://twitter.com/intent/tweet?text=Think%20income%20inequality%20is%20getting%20worse%20in%20the%20U.S.%3F%20Check%20the%20growing%20gap%20in%20the%20U.K%E2%80%A6%20%40marketplace%E2%80%99s%20special%20%20Mind%20The%20Gap%20http%3A%2F%2Fmktplc.org%2F1sLO8Nx" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/twitter.png"></a></li>
+					</ul>
+				</div> <!-- // STORY -->
+
+				<ul class="bullet-list">
+					<li><a href="#" class="intro-btn">Bullet 0</a></li>
+					<li><a href="#" class="liverpool-btn">Bullet 1</a></li>
+					<li><a href="#" class="notting-hill-btn">Bullet 2</a></li>
+					<li><a href="#" class="brixton-btn" style="background:none;">Bullet 3</a></li>
+					<li><a href="#" class="farringdon-btn">Bullet 4</a></li>
+					<li><a href="#" class="seven-sisters-btn">Bullet 5</a></li>
+				</ul>
+			</div> <!-- // SLIDE 3 -->
+
+			<div id="farringdon" class="slider">
+				<div class="london-img">
+					<a href="#"><img src="http://www.marketplace.org/sites/default/files/photo-3_0.jpg" alt="Man standing in laundromat" class="story-img"></a>
+				</div> <!-- // IMG -->
+
+				<div class="london-story">
+					<span>A Special Series</span>
+					<ul>
+						<li class="prev"><a href="#" class="brixton-btn">Previous</a></li>
+						<li class="next"><a href="#" class="seven-sisters-btn">Next</a></li>
+					</ul>
+
+					<a href="#" class="story-title">Farringdon Station, Emilie</a>
+					<p>Located in the London borough of Islington, just outside of the city of London, Farringdon station was opened in 1863. The tube stop for Smithfield Market, the station was built together with a freight route for livestock. The average household income in the Islington borough is $96,000.</p>
+					<ul class="graphic">
+						<li><a href="http://www.marketplace.org/sites/default/files/0521Farringdon.mp3">Listen to Emilie</a></li>
+					</ul>
+					<ul class="mtg-social-links">
+						<li class="fb-share-icon"><a title="Mind The Gap" href="https://www.facebook.com/sharer/sharer.php?u=http://www.marketplace.org/topics/world/mind-gap" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/facebook.png"></a></li>
+						<li class="twitter-share-icon"><a href="https://twitter.com/intent/tweet?text=Think%20income%20inequality%20is%20getting%20worse%20in%20the%20U.S.%3F%20Check%20the%20growing%20gap%20in%20the%20U.K%E2%80%A6%20%40marketplace%E2%80%99s%20special%20%20Mind%20The%20Gap%20http%3A%2F%2Fmktplc.org%2F1sLO8Nx" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/twitter.png"></a></li>
+					</ul>
+				</div> <!-- // STORY -->
+
+				<ul class="bullet-list">
+					<li><a href="#" class="intro-btn">Bullet 0</a></li>
+					<li><a href="#" class="liverpool-btn">Bullet 1</a></li>
+					<li><a href="#" class="notting-hill-btn">Bullet 2</a></li>
+					<li><a href="#" class="brixton-btn">Bullet 3</a></li>
+					<li><a href="#" class="farringdon-btn" style="background:none;">Bullet 4</a></li>
+					<li><a href="#" class="seven-sisters-btn">Bullet 5</a></li>
+				</ul>
+			</div> <!-- // SLIDE 4 -->
+
+			<div id="seven-sisters" class="slider" style="width: 16.56%;">
+			<div class="london-img">
+				<a href="#"><img src="http://www.marketplace.org/sites/default/files/field_images/2014/05/Canary-Wharf---Damian-Kandiah1_0.jpg" alt="Man standing in laundromat" class="story-img"></a>
+			</div> <!-- // IMG -->
+
+			<div class="london-story">
+				<span>A Special Series</span>
+				<ul>
+					<li class="prev"><a href="#" class="farringdon-btn">Previous</a></li>
+					<li class="next">Next</li>
+				</ul>
+
+				<a href="#" class="story-title">Canary Wharf Station, Damian Kandiah</a>
+				<p>Over 40 million people pass through the Canary Wharf tube station every year, making it the most popular tube stop outside central London. Based in the Tower Hamlets borough, 18 percent of households live on less than $25,000 and 48 percent of children live in poverty, the highest rate in the UK.</p>
+				<ul class="graphic">
+					<li><a href="http://www.marketplace.org/sites/default/files/0518CanaryWharf.mp3">Listen to Damian Kandiah</a></li>
+				</ul>
+			</div> <!-- // STORY -->
+
+			<ul class="bullet-list">
+				<li><a href="#" class="intro-btn">Bullet 0</a></li>
+				<li><a href="#" class="liverpool-btn">Bullet 1</a></li>
+				<li><a href="#" class="notting-hill-btn">Bullet 2</a></li>
+				<li><a href="#" class="brixton-btn">Bullet 3</a></li>
+				<li><a href="#" class="farringdon-btn">Bullet 4</a></li>
+				<li><a href="#" class="seven-sisters-btn" style="background:none;">Bullet 5</a></li>
+			</ul>
+			<ul class="mtg-social-links">
+				<li class="fb-share-icon"><a title="Mind The Gap" href="https://www.facebook.com/sharer/sharer.php?u=http://www.marketplace.org/topics/world/mind-gap" target="_blank"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/facebook.png"></a></li>
+				<li class="twitter-share-icon"><a href="https://twitter.com/intent/tweet?text=Think%20income%20inequality%20is%20getting%20worse%20in%20the%20U.S.%3F%20Check%20the%20growing%20gap%20in%20the%20U.K%E2%80%A6%20%40marketplace%E2%80%99s%20special%20%20Mind%20The%20Gap%20http%3A%2F%2Fmktplc.org%2F1sLO8Nx"><img src="http://www.marketplace.org/sites/default/iframes/american_futures/images/twitter.png"></a></li>
+			</ul>
+		</div> <!-- // SLIDE 5 -->
+		</div>
+	
+	
+	<div class="data-sources">Data from <a href="http://www.endchildpoverty.org.uk/why-end-child-poverty/poverty-in-your-area#map">End Child Poverty U.K.</a>, <a href="http://data.london.gov.uk/datastore/package/average-income-tax-payers-borough">Greater London Authority</a> and the <a href="http://www.landregistry.gov.uk/public/information/public-data/hpi-background">Land Registry</a>.</div>
+	</div> <!-- // CONTAINER -->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#london-container').addClass('intro');
+			$('.intro-btn').click(function() {
+				$('#london-container').removeClass('liverpool notting-hill brixton farringdon seven-sisters').addClass('intro');
+				return false;
+			});
+			$('.liverpool-btn').click(function() {
+				$('#london-container').removeClass('intro notting-hill brixton farringdon seven-sisters').addClass('liverpool');
+				return false;
+			});
+
+			$('.notting-hill-btn').click(function() {
+				$('#london-container').removeClass('intro liverpool brixton farringdon seven-sisters').addClass('notting-hill');
+				return false;
+			});
+			
+			$('.brixton-btn').click(function() {
+				$('#london-container').removeClass('intro liverpool notting-hill farringdon seven-sisters').addClass('brixton');
+				return false;
+			});
+
+			$('.farringdon-btn').click(function() {
+				$('#london-container').removeClass('intro liverpool notting-hill brixton seven-sisters').addClass('farringdon');
+				return false;
+			});
+
+			$('.seven-sisters-btn').click(function() {
+				$('#london-container').removeClass('intro liverpool notting-hill brixton farringdon').addClass('seven-sisters');
+				return false;
+			});
+
+	});	
+</script>
+</body>
+
+</html> 
